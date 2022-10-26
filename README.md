@@ -10,6 +10,7 @@ Pokedex by Pavel Gasanov
 * Jest unit testing
 * `graphql-request` as minimal GraphQL library
 * `react-pagination` to implement list pagination
+* GitHub action to run tests
 
 Filtering done on frontend. Whole data size is ~55kb and will not increase in near future, so priority is user experience - no data reloading. 
 
