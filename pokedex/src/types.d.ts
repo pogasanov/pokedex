@@ -8,6 +8,8 @@ export interface IPokemon {
   id: number
   name: string
   stats: IStat[]
+  types: number[]
+  species: number
 }
 
 export interface IType {
@@ -21,7 +23,7 @@ export interface ISpecies {
 }
 
 export interface IStatistic {
-  species: ISpecies[],
-  types: IType[],
+  species: ISpecies[]
+  types: IType[]
   unique_pokemons: number
 }

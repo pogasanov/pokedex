@@ -3,10 +3,10 @@ import {IPokemon, IStatistic} from "types";
 
 const BASE_URL = 'https://beta.pokeapi.co/graphql/v1beta'
 
-export async function getListOfPokemons(name?: string): Promise<IPokemon[]> {
+export async function getListOfPokemons(): Promise<IPokemon[]> {
   const data = await request(BASE_URL, gql`
-  query getPokemons($name: String) {
-    pokemon_v2_pokemon(where: {name: {_ilike: $name}}) {
+  {
+    pokemon_v2_pokemon {
       id
       name
       pokemon_v2_pokemonstats {
@@ -16,14 +16,18 @@ export async function getListOfPokemons(name?: string): Promise<IPokemon[]> {
           name
         }
       }
+      pokemon_v2_pokemontypes {
+        id
+      }
+      pokemon_species_id
     }
   }
-  `, {
-    name: `%${name ?? ''}%`
-  })
+  `)
   return data.pokemon_v2_pokemon.map((p: any) => ({
     id: p.id,
     name: p.name,
+    species: p.pokemon_species_id,
+    types: p.pokemon_v2_pokemontypes.map((t: any) => t.id),
     stats: p.pokemon_v2_pokemonstats.map((s: any) => ({
       base_stat: s.base_stat,
       name: s.pokemon_v2_stat.name

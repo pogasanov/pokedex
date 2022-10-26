@@ -1,9 +1,8 @@
 import {POKEMONS_MOCKS, SPECIES_MOCKS, TYPES_MOCKS} from "mocks";
 import {IPokemon, IStatistic} from "types";
 
-export async function getListOfPokemons(name: string): Promise<IPokemon[]> {
-  return Promise.resolve(POKEMONS_MOCKS.filter(s => s.name.toLowerCase().includes(name.toLowerCase()))
-  )
+export async function getListOfPokemons(): Promise<IPokemon[]> {
+  return Promise.resolve(POKEMONS_MOCKS)
 }
 
 export async function getStatistic(): Promise<IStatistic> {
