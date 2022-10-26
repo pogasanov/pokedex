@@ -9,3 +9,9 @@ export interface IPokemon {
   name: string
   stats: IStat[]
 }
+
+export interface IStatistic {
+  pokemons: number
+  types: number
+  species: number
+}
