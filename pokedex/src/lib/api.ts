@@ -33,6 +33,7 @@ export async function getListOfPokemons(): Promise<IPokemon[]> {
     image: JSON.parse(p.pokemon_v2_pokemonsprites[0].sprites)?.front_default,
     types: p.pokemon_v2_pokemontypes.map((t: any) => t.id),
     stats: p.pokemon_v2_pokemonstats.map((s: any) => ({
+      id: s.id,
       base_stat: s.base_stat,
       name: s.pokemon_v2_stat.name
     }))

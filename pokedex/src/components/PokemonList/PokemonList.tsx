@@ -25,13 +25,18 @@ export default function PokemonList({pokemons}: IProps) {
     setItemOffset(newOffset);
   };
 
+  const statsList = useMemo(() => {
+    const allStats = pokemons.flatMap(p => p.stats)
+    return Array.from(new Map(allStats.map(item => [item.name, item])).values())
+  }, [pokemons])
+
   return <div>
     <table>
       <thead>
       <tr>
         <th>Name</th>
         <th>Image</th>
-        <th>Stats</th>
+        {statsList.map(s => <th key={s.id}>{s.name}</th>)}
       </tr>
       </thead>
       <tbody>
@@ -43,9 +48,7 @@ export default function PokemonList({pokemons}: IProps) {
           <td>
             <img src={pokemon.image} alt={pokemon.name}/>
           </td>
-          <td>
-            {pokemon.stats.map(s => (<div key={s.id}>{s.name}: {s.base_stat}</div>))}
-          </td>
+          {statsList.map(s => <td key={s.id}>{pokemon.stats.find(stat => stat.name === s.name)?.base_stat}</td>)}
         </tr>
       ))}
       </tbody>

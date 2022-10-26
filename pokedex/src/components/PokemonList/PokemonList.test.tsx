@@ -6,8 +6,8 @@ import App from './PokemonList';
 test('renders list of pokemons', () => {
   render(<App pokemons={POKEMONS_MOCKS}/>);
   expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
-  expect(screen.getByText(/hp: 10/i)).toBeInTheDocument();
-  expect(screen.getByText(/attack: 20/i)).toBeInTheDocument();
+  expect(screen.getByText(/10/i)).toBeInTheDocument();
+  expect(screen.getByText(/20/i)).toBeInTheDocument();
 });
 
 test('shows pokemon image', () => {
