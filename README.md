@@ -2,6 +2,8 @@
 
 Pokedex by Pavel Gasanov
 
+![Pokedex image](https://github.com/crystalmanner/hiring-process/blob/pogasanov/image.png?raw=true)
+
 ## Description
 
 * SPA React application.
