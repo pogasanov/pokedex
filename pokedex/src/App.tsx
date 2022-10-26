@@ -1,6 +1,7 @@
 import SpeciesFilter from "components/Filter/SpeciesFilter";
 import TypesFilter from "components/Filter/TypesFilter";
 import PokemonList from "components/PokemonList/PokemonList";
+import Spinner from "components/Spinner/Spinner";
 import Statistic from "components/Statistic/Statistic";
 import {getListOfPokemons, getStatistic} from "lib/api";
 import React, {useEffect, useMemo, useState} from 'react';
@@ -37,6 +38,7 @@ function App() {
   return (
     <div className={styles.container}>
       <h1>Pokedex by Pavel Gasanov</h1>
+      {!statistic && <Spinner/>}
       {statistic && <Statistic
         pokemons={statistic.unique_pokemons}
         species={statistic.species.length}
@@ -68,7 +70,8 @@ function App() {
           </div>
         </>
       )}
-      <PokemonList pokemons={filteredPokemonList}/>
+      {pokemons.length === 0 && <Spinner/>}
+      {pokemons.length > 0 && <PokemonList pokemons={filteredPokemonList}/>}
     </div>
   );
 }
