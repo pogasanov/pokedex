@@ -1,3 +1,5 @@
+import styles from './Statistic.module.css';
+
 interface IProps {
   pokemons: number
   species: number
@@ -6,16 +8,16 @@ interface IProps {
 
 export default function Statistic({pokemons, species, types}: IProps) {
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <span>
         Pokemons: {pokemons}
-      </div>
-      <div>
+      </span>
+      <span>
         Types: {types}
-      </div>
-      <div>
+      </span>
+      <span>
         Species: {species}
-      </div>
+      </span>
     </div>
   )
 }

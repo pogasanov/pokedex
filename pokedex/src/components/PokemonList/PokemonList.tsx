@@ -7,7 +7,7 @@ interface IProps {
   pokemons: IPokemon[]
 }
 
-const ITEMS_PER_PAGE = 20
+const ITEMS_PER_PAGE = 10
 
 export default function PokemonList({pokemons}: IProps) {
   const [itemOffset, setItemOffset] = useState(0);
@@ -51,6 +51,7 @@ export default function PokemonList({pokemons}: IProps) {
   const handlePageClick = (event: { selected: number }) => {
     const newOffset = (event.selected * ITEMS_PER_PAGE) % pokemons.length;
     setItemOffset(newOffset);
+    window.scrollTo({top: 0, behavior: 'smooth'})
   };
 
   const statsList = useMemo(() => {

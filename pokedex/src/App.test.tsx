@@ -12,7 +12,7 @@ test('renders pokemon list', async () => {
 
 test('search for pokemon', async () => {
   render(<App/>);
-  const input = screen.getByLabelText(/Введите имя покемона/i)
+  const input = await screen.findByLabelText(/Input pokemon name/i)
   fireEvent.change(input, {target: {value: 'Kachu'}})
   expect(await screen.findByText(/pikachu/i)).toBeInTheDocument();
   expect(screen.queryByText(/bulbasaur/i)).not.toBeInTheDocument();

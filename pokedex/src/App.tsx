@@ -4,7 +4,7 @@ import PokemonList from "components/PokemonList/PokemonList";
 import Statistic from "components/Statistic/Statistic";
 import {getListOfPokemons, getStatistic} from "lib/api";
 import React, {useEffect, useMemo, useState} from 'react';
-import './App.css';
+import styles from './App.module.css';
 import {IPokemon, IStatistic} from "types";
 
 function App() {
@@ -35,7 +35,8 @@ function App() {
   }, [pokemons, search, selectedSpecies, selectedTypes])
 
   return (
-    <div className="App">
+    <div className={styles.container}>
+      <h1>Pokedex by Pavel Gasanov</h1>
       {statistic && <Statistic
         pokemons={statistic.unique_pokemons}
         species={statistic.species.length}
@@ -48,21 +49,25 @@ function App() {
             value={selectedTypes}
             onChange={ids => setSelectedTypes(ids)}
           />
-          <SpeciesFilter
-            possibleSpecies={statistic.species}
-            value={selectedSpecies}
-            onChange={id => setSelectedSpecies(id)}
-          />
+          <div className={styles.filter}>
+            <div>
+              <input
+                id="search"
+                type="text"
+                name="search"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                aria-label="Input pokemon name"
+              />
+            </div>
+            <SpeciesFilter
+              possibleSpecies={statistic.species}
+              value={selectedSpecies}
+              onChange={id => setSelectedSpecies(id)}
+            />
+          </div>
         </>
       )}
-      <label htmlFor="search">Введите имя покемона</label>
-      <input
-        id="search"
-        type="text"
-        name="search"
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-      />
       <PokemonList pokemons={filteredPokemonList}/>
     </div>
   );
