@@ -16,11 +16,11 @@ export default function Filter({types, species}: IProps) {
         ))}
       </div>
       <div>
-        {species.map(sp => (
-          <label key={sp.id} htmlFor={`type-${sp.id}`}>{sp.name}
-            <input type="checkbox" name="type" id={`type-${sp.id}`} value={sp.id}/>
-          </label>
-        ))}
+        <label htmlFor="species">Species</label>
+        <select name="species" id="species">
+          <option value=""></option>
+          {species.map(sp => <option key={sp.id} value={sp.id}>{sp.name}</option>)}
+        </select>
       </div>
     </div>
   )
