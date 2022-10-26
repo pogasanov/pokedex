@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Switch to working directory
-        run: cd pokedex
       - name: Install modules
+        working-directory: ./pokedex
         run: npm install
       - name: Run tests
+        working-directory: ./pokedex
         run: npm run test
