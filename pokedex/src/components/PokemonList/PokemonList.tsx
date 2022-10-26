@@ -1,6 +1,7 @@
 import {useMemo, useState} from "react";
 import ReactPaginate from "react-paginate";
 import {IPokemon} from "types";
+import styles from './PokemonList.module.css';
 
 interface IProps {
   pokemons: IPokemon[]
@@ -10,11 +11,38 @@ const ITEMS_PER_PAGE = 20
 
 export default function PokemonList({pokemons}: IProps) {
   const [itemOffset, setItemOffset] = useState(0);
+  const [sorting, setSorting] = useState<string | null>(null)
 
   const currentItems = useMemo(() => {
     const endOffset = itemOffset + ITEMS_PER_PAGE;
-    return pokemons.slice(itemOffset, endOffset)
-  }, [itemOffset, pokemons])
+    let res = pokemons
+    if (sorting) {
+      res = res.sort((a, b) => {
+        let reversed = false
+        let key = sorting
+        if (key[0] === '-') {
+          reversed = true
+          key = sorting.slice(1)
+        }
+        const aStat = a.stats.find(s => s.name === key)
+        const bStat = b.stats.find(s => s.name === key)
+        if (!aStat) {
+          return 1
+        }
+        if (!bStat) {
+          return -1
+        }
+        if (reversed) {
+          return bStat.base_stat - aStat.base_stat
+        } else {
+          return aStat.base_stat - bStat.base_stat
+        }
+      })
+    } else {
+      res = res.sort((a, b) => a.name.localeCompare(b.name))
+    }
+    return res.slice(itemOffset, endOffset)
+  }, [itemOffset, pokemons, sorting])
 
   const pageCount = useMemo(() => {
     return Math.ceil(pokemons.length / ITEMS_PER_PAGE)
@@ -30,13 +58,31 @@ export default function PokemonList({pokemons}: IProps) {
     return Array.from(new Map(allStats.map(item => [item.name, item])).values())
   }, [pokemons])
 
-  return <div>
-    <table>
+  const toggleSorting = (name: string) => {
+    setSorting(prev => {
+      if (!prev) {
+        return name
+      }
+      if (prev[0] !== '-') {
+        return `-${name}`
+      }
+      return null
+    })
+  }
+
+  return <div className={styles.container}>
+    <table className={styles.table}>
       <thead>
       <tr>
         <th>Name</th>
         <th>Image</th>
-        {statsList.map(s => <th key={s.id}>{s.name}</th>)}
+        {statsList.map(s => <th
+          key={s.id}
+          onClick={() => toggleSorting(s.name)}
+          className={styles.selectableColumn}
+        >
+          {s.name} {sorting === s.name ? '▼' : sorting === `-${s.name}` ? '▲' : ' '}
+        </th>)}
       </tr>
       </thead>
       <tbody>
@@ -46,7 +92,7 @@ export default function PokemonList({pokemons}: IProps) {
             {pokemon.name}
           </td>
           <td>
-            <img src={pokemon.image} alt={pokemon.name}/>
+            {pokemon.image && <img src={pokemon.image} alt={pokemon.name}/>}
           </td>
           {statsList.map(s => <td key={s.id}>{pokemon.stats.find(stat => stat.name === s.name)?.base_stat}</td>)}
         </tr>
@@ -61,6 +107,7 @@ export default function PokemonList({pokemons}: IProps) {
       pageRangeDisplayed={3}
       pageCount={pageCount}
       previousLabel="< previous"
+      containerClassName={styles.pagination}
     />
   </div>
 }

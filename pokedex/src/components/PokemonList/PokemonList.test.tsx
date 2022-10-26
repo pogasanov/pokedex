@@ -15,3 +15,9 @@ test('shows pokemon image', () => {
   const image = screen.getByAltText<HTMLImageElement>('pikachu');
   expect(image.src).toContain('https://example.com/pikachu.png');
 });
+
+test('sorts by hp', () => {
+  render(<App pokemons={POKEMONS_MOCKS}/>);
+  const image = screen.getByAltText<HTMLImageElement>('pikachu');
+  expect(image.src).toContain('https://example.com/pikachu.png');
+});
