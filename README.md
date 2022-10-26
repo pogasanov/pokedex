@@ -5,10 +5,11 @@ Pokedex by Pavel Gasanov
 ## Description
 
 * SPA React application.
-* Minimal extra dependencies - only 2
+* Minimal extra dependencies - only 3
 * Typescript
 * Jest unit testing
 * `graphql-request` as minimal GraphQL library
+* `chart.js` as simple data visualization library
 * `react-pagination` to implement list pagination
 * GitHub action to run tests
 

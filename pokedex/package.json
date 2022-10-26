@@ -8,6 +8,7 @@
     "@types/node": "^16.18.0",
     "@types/react": "^18.0.23",
     "@types/react-dom": "^18.0.7",
+    "chart.js": "^3.9.1",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
     "react": "^18.2.0",

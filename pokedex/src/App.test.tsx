@@ -3,6 +3,7 @@ import {fireEvent, render, screen} from '@testing-library/react';
 import App from './App';
 
 jest.mock("./lib/api");
+jest.mock('./components/TypesChart/TypesChart');
 
 test('renders pokemon list', async () => {
   render(<App/>);

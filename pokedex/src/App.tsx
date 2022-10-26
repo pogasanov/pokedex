@@ -3,6 +3,7 @@ import TypesFilter from "components/Filter/TypesFilter";
 import PokemonList from "components/PokemonList/PokemonList";
 import Spinner from "components/Spinner/Spinner";
 import Statistic from "components/Statistic/Statistic";
+import TypesChart from "components/TypesChart/TypesChart";
 import {getListOfPokemons, getStatistic} from "lib/api";
 import React, {useEffect, useMemo, useState} from 'react';
 import styles from './App.module.css';
@@ -38,6 +39,7 @@ function App() {
   return (
     <div className={styles.container}>
       <h1>Pokedex by Pavel Gasanov</h1>
+      <TypesChart pokemons={pokemons}/>
       {!statistic && <Spinner/>}
       {statistic && <Statistic
         pokemons={statistic.unique_pokemons}
