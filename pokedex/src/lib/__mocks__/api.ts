@@ -1,4 +1,4 @@
-export async function getListOfPokemons(name?: string) {
+export async function getListOfPokemons(name: string) {
   return Promise.resolve([
     {
       id: 1,
@@ -8,5 +8,5 @@ export async function getListOfPokemons(name?: string) {
       id: 2,
       name: 'bulbasaur'
     }
-  ])
+  ].filter(s => s.name.toLowerCase().includes(name.toLowerCase())))
 }
