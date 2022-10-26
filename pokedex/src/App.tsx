@@ -1,7 +1,9 @@
+import SpeciesFilter from "components/Filter/SpeciesFilter";
+import TypesFilter from "components/Filter/TypesFilter";
 import PokemonList from "components/PokemonList/PokemonList";
 import Statistic from "components/Statistic/Statistic";
 import {getListOfPokemons, getStatistic} from "lib/api";
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import './App.css';
 import {IPokemon, IStatistic} from "types";
 
@@ -11,12 +13,26 @@ function App() {
   const [statistic, setStatistic] = useState<IStatistic | null>(null)
 
   useEffect(() => {
-    getListOfPokemons(search).then(res => setPokemons(res))
-  }, [search])
-
-  useEffect(() => {
+    getListOfPokemons().then(res => setPokemons(res))
     getStatistic().then(res => setStatistic(res))
   }, [])
+
+  const [selectedSpecies, setSelectedSpecies] = useState<number | null>(null)
+  const [selectedTypes, setSelectedTypes] = useState<number[]>([])
+
+  const filteredPokemonList = useMemo(() => {
+    let result = pokemons
+    if (search) {
+      result = result.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+    }
+    if (selectedTypes.length > 0) {
+      result = result.filter(p => p.types.some(t => selectedTypes.includes(t)))
+    }
+    if (selectedSpecies) {
+      result = result.filter(p => p.species === selectedSpecies)
+    }
+    return result
+  }, [pokemons, search, selectedSpecies, selectedTypes])
 
   return (
     <div className="App">
@@ -25,6 +41,20 @@ function App() {
         species={statistic.species.length}
         types={statistic.types.length}
       />}
+      {statistic && (
+        <>
+          <TypesFilter
+            possibleTypes={statistic.types}
+            value={selectedTypes}
+            onChange={ids => setSelectedTypes(ids)}
+          />
+          <SpeciesFilter
+            possibleSpecies={statistic.species}
+            value={selectedSpecies}
+            onChange={id => setSelectedSpecies(id)}
+          />
+        </>
+      )}
       <label htmlFor="search">Введите имя покемона</label>
       <input
         id="search"
@@ -33,7 +63,7 @@ function App() {
         value={search}
         onChange={e => setSearch(e.target.value)}
       />
-      <PokemonList pokemons={pokemons}/>
+      <PokemonList pokemons={filteredPokemonList}/>
     </div>
   );
 }
