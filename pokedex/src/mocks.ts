@@ -6,6 +6,7 @@ export const POKEMONS_MOCKS: IPokemon[] = [
     name: 'pikachu',
     species: 179,
     types: [1, 2],
+    image: 'https://example.com/pikachu.png',
     stats: [
       {
         id: 1,
@@ -24,6 +25,7 @@ export const POKEMONS_MOCKS: IPokemon[] = [
     name: 'bulbasaur',
     species: 179,
     types: [1, 2],
+    image: 'https://example.com/bulbasaur.png',
     stats: [
       {
         id: 1,

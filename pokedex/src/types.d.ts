@@ -10,6 +10,7 @@ export interface IPokemon {
   stats: IStat[]
   types: number[]
   species: number
+  image: string
 }
 
 export interface IType {
