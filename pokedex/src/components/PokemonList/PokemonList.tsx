@@ -77,6 +77,7 @@ export default function PokemonList({pokemons}: IProps) {
       <tr>
         <th>Name</th>
         <th>Image</th>
+        <th>Types</th>
         {statsList.map(s => <th
           key={s.id}
           onClick={() => toggleSorting(s.name)}
@@ -94,6 +95,9 @@ export default function PokemonList({pokemons}: IProps) {
           </td>
           <td>
             {pokemon.image && <img src={pokemon.image} alt={pokemon.name}/>}
+          </td>
+          <td>
+            {pokemon.types.map(t => t.name).join(', ')}
           </td>
           {statsList.map(s => <td key={s.id}>{pokemon.stats.find(stat => stat.name === s.name)?.base_stat}</td>)}
         </tr>

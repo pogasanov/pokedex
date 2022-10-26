@@ -8,7 +8,7 @@ export interface IPokemon {
   id: number
   name: string
   stats: IStat[]
-  types: number[]
+  types: IType[]
   species: number
   image: string
 }

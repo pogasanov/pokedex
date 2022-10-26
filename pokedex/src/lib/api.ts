@@ -18,6 +18,9 @@ export async function getListOfPokemons(): Promise<IPokemon[]> {
       }
       pokemon_v2_pokemontypes {
         type_id
+        pokemon_v2_type {
+          name
+        }
       }
       pokemon_species_id
       pokemon_v2_pokemonsprites {
@@ -31,7 +34,10 @@ export async function getListOfPokemons(): Promise<IPokemon[]> {
     name: p.name,
     species: p.pokemon_species_id,
     image: JSON.parse(p.pokemon_v2_pokemonsprites[0].sprites)?.front_default,
-    types: p.pokemon_v2_pokemontypes.map((t: any) => t.type_id),
+    types: p.pokemon_v2_pokemontypes.map((t: any) => ({
+      id: t.type_id,
+      name: t.pokemon_v2_type.name
+    })),
     stats: p.pokemon_v2_pokemonstats.map((s: any) => ({
       id: s.id,
       base_stat: s.base_stat,

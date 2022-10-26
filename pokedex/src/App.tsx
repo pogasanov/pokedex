@@ -26,7 +26,7 @@ function App() {
       result = result.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
     }
     if (selectedTypes.length > 0) {
-      result = result.filter(p => p.types.some(t => selectedTypes.includes(t)))
+      result = result.filter(p => p.types.some(t => selectedTypes.includes(t.id)))
     }
     if (selectedSpecies) {
       result = result.filter(p => p.species === selectedSpecies)
