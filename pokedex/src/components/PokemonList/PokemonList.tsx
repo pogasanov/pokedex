@@ -1,7 +1,4 @@
-export interface IPokemon {
-  id: number
-  name: string
-}
+import {IPokemon} from "types";
 
 interface IProps {
   pokemons: IPokemon[]
@@ -10,7 +7,7 @@ interface IProps {
 export default function PokemonList({pokemons}: IProps) {
   return <div>
     {pokemons.map(pokemon => (
-      <div>
+      <div key={pokemon.id}>
         {pokemon.name}
       </div>
     ))}
