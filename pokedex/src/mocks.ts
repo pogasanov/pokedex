@@ -1,4 +1,4 @@
-import {IPokemon} from "types";
+import {IPokemon, ISpecies, IType} from "types";
 
 export const POKEMONS_MOCKS: IPokemon[] = [
   {
@@ -33,4 +33,26 @@ export const POKEMONS_MOCKS: IPokemon[] = [
       }
     ]
   }
+]
+
+export const SPECIES_MOCKS: ISpecies[] = [
+  {
+    id: 1,
+    name: 'wtf'
+  },
+  {
+    id: 2,
+    name: 'wtf'
+  },
+]
+
+export const TYPES_MOCKS: IType[] = [
+  {
+    id: 1,
+    name: 'wtf'
+  },
+  {
+    id: 2,
+    name: 'wtf'
+  },
 ]

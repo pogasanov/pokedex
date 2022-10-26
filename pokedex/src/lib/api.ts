@@ -1,11 +1,11 @@
 import {request, gql} from 'graphql-request'
-import {IPokemon} from "types";
+import {IPokemon, IStatistic} from "types";
 
 const BASE_URL = 'https://beta.pokeapi.co/graphql/v1beta'
 
 export async function getListOfPokemons(name?: string): Promise<IPokemon[]> {
   const data = await request(BASE_URL, gql`
-  query samplePokeAPIquery($name: String) {
+  query getPokemons($name: String) {
     pokemon_v2_pokemon(where: {name: {_ilike: $name}}) {
       id
       name
@@ -29,4 +29,29 @@ export async function getListOfPokemons(name?: string): Promise<IPokemon[]> {
       name: s.pokemon_v2_stat.name
     }))
   }))
+}
+
+export async function getStatistic(): Promise<IStatistic> {
+  const data = await request(BASE_URL, gql`
+  {
+    pokemon_v2_pokemonspecies {
+      id
+      name
+    }
+    pokemon_v2_type {
+      name
+      id
+    }
+    pokemon_v2_pokemon_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+  `)
+  return {
+    species: data.pokemon_v2_pokemonspecies,
+    types: data.pokemon_v2_type,
+    unique_pokemons: data.pokemon_v2_pokemon_aggregate.aggregate.count
+  }
 }

@@ -1,20 +1,20 @@
-import {IStatistic} from "types";
-
 interface IProps {
-  statistic: IStatistic
+  pokemons: number
+  species: number
+  types: number
 }
 
-export default function Statistic({statistic}: IProps) {
+export default function Statistic({pokemons, species, types}: IProps) {
   return (
     <div>
       <div>
-        Pokemons: {statistic.pokemons}
+        Pokemons: {pokemons}
       </div>
       <div>
-        Types: {statistic.types}
+        Types: {types}
       </div>
       <div>
-        Species: {statistic.species}
+        Species: {species}
       </div>
     </div>
   )

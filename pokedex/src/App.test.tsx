@@ -17,3 +17,8 @@ test('search for pokemon', async () => {
   expect(await screen.findByText(/pikachu/i)).toBeInTheDocument();
   expect(screen.queryByText(/bulbasaur/i)).not.toBeInTheDocument();
 });
+
+test('shows statistic', async () => {
+  render(<App/>)
+  expect(await screen.findByText(/pokemons: 2/i)).toBeInTheDocument();
+})
