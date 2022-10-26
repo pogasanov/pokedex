@@ -19,3 +19,19 @@
     list-style: none;
     gap: 1rem;
 }
+
+.disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.active {
+    background-color: #cbedfa;
+}
+
+.page {
+    display: flex;
+    align-items: center;
+    padding: .2rem .3rem;
+    cursor: pointer;
+}

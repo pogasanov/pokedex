@@ -109,6 +109,11 @@ export default function PokemonList({pokemons}: IProps) {
       pageCount={pageCount}
       previousLabel="< previous"
       containerClassName={styles.pagination}
+      disabledLinkClassName={styles.disabled}
+      activeClassName={styles.active}
+      pageClassName={styles.page}
+      nextClassName={styles.page}
+      previousClassName={styles.page}
     />
   </div>
 }
