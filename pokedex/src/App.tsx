@@ -39,15 +39,18 @@ function App() {
   return (
     <div className={styles.container}>
       <h1>Pokedex by Pavel Gasanov</h1>
-      <TypesChart pokemons={pokemons}/>
+
+      {pokemons.length === 0 && <Spinner/>}
+      {pokemons.length > 0 && <TypesChart pokemons={pokemons}/>}
+
       {!statistic && <Spinner/>}
-      {statistic && <Statistic
-        pokemons={statistic.unique_pokemons}
-        species={statistic.species.length}
-        types={statistic.types.length}
-      />}
       {statistic && (
         <>
+          <Statistic
+            pokemons={statistic.unique_pokemons}
+            species={statistic.species.length}
+            types={statistic.types.length}
+          />
           <TypesFilter
             possibleTypes={statistic.types}
             value={selectedTypes}
