@@ -9,3 +9,9 @@ test('renders list of pokemons', () => {
   expect(screen.getByText(/hp: 10/i)).toBeInTheDocument();
   expect(screen.getByText(/attack: 20/i)).toBeInTheDocument();
 });
+
+test('shows pokemon image', () => {
+  render(<App pokemons={POKEMONS_MOCKS}/>);
+  const image = screen.getByAltText<HTMLImageElement>('pikachu');
+  expect(image.src).toContain('https://example.com/pikachu.png');
+});
