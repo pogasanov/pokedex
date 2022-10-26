@@ -1,4 +1,5 @@
 import {IType} from "types";
+import styles from './TypesFilter.module.css';
 
 interface IProps {
   possibleTypes: IType[]
@@ -19,7 +20,7 @@ export default function TypesFilter({value, possibleTypes, onChange}: IProps) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {possibleTypes.map(type => (
         <div key={type.id}>
           <label htmlFor={`type-${type.id}`}>{type.name}

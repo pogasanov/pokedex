@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table th {
+    min-width: 8rem;
+}
+
+.selectableColumn {
+    cursor: pointer;
+}
+
+.pagination {
+    display: flex;
+    margin: 1rem 0 2rem;
+    padding: 0;
+    list-style: none;
+    gap: 1rem;
+}
