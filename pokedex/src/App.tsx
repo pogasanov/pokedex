@@ -1,23 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
+import PokemonList from "components/PokemonList/PokemonList";
+import {getListOfPokemons} from "lib/api";
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {IPokemon} from "types";
 
 function App() {
+  const [pokemons, setPokemons] = useState<IPokemon[]>([])
+  useEffect(() => {
+    getListOfPokemons().then(res => setPokemons(res))
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <PokemonList pokemons={pokemons}/>
       </header>
     </div>
   );
