@@ -37,22 +37,22 @@ export const POKEMONS_MOCKS: IPokemon[] = [
 
 export const SPECIES_MOCKS: ISpecies[] = [
   {
-    id: 1,
-    name: 'wtf'
+    id: 179,
+    name: 'mareep'
   },
   {
-    id: 2,
-    name: 'wtf'
+    id: 331,
+    name: 'cacnea'
   },
 ]
 
 export const TYPES_MOCKS: IType[] = [
   {
     id: 1,
-    name: 'wtf'
+    name: 'normal'
   },
   {
     id: 2,
-    name: 'wtf'
+    name: 'flying'
   },
 ]
